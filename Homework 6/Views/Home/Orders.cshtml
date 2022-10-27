@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Homework_6.Models.order_items>
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Orders</h2>
+
+<body>
+    @foreach(var item in Model)
+            {
+        
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>List Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@item.product</td>
+                            <td>@item.list_price</td>
+                            <td>@item.quantity</td>
+                            <td>@item.list_price*@item.quantity</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+            }
+    
+</body>
+

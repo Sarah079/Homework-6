@@ -1,0 +1,108 @@
+﻿@model PagedList.IPagedList<Homework_6.Models.product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .form-control {
+        display: inline !important;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Products</h2>
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-lg-12">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Enter Product Name..." })
+                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="button" class="btn btn-info" onclick="window.location.href = '@Url.Action("Create", "Products")'">Create</button>
+            </div>
+        </div>
+
+    </div>
+
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.model_year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.list_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.brand.brand_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category.category_name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.product_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.product_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.product_id })
+            </td>
+        </tr>
+    }
+
+</table>
+@* edit *@
+<div class="modal" id="editmodal">
+    <div class="modal-content" id="editmodalcontent">
+    </div>
+</div>
+@* delete *@
+<div class="modal" id="deletmodal">
+    <div class="modal-content" id="deletemodalcontent">
+    </div>
+</div>
+@* create *@
+<div class="modal" id="editmodal">
+    <div class="modal-content" id="editmodalcontent">
+    </div>
+</div>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+new { page, currentFilter = ViewBag.CurrentFilter }))
+
+@section script{
+    <script>
+
+
+
+    </script>
+    }

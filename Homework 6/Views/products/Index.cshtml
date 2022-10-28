@@ -2,11 +2,6 @@
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
-<style>
-    .form-control {
-        display: inline !important;
-    }
-</style>
 
 @{
     ViewBag.Title = "Index";
@@ -69,9 +64,9 @@
                 @Html.DisplayFor(modelItem => item.category.category_name)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.product_id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.product_id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.product_id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.product_id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.product_id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.product_id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
@@ -98,11 +93,3 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
 new { page, currentFilter = ViewBag.CurrentFilter }))
-
-@section script{
-    <script>
-
-
-
-    </script>
-    }

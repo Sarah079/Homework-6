@@ -17,12 +17,11 @@ namespace Homework_6.Controllers
 
         public ActionResult Orders()
         {
-            string inputdate = "";
-            var orders = db.orders.Include(o => o.order_date);
+            //string inputdate = "";
+            var order = db.orders.Include(o => o.order_date);
             
-            return View();
+            return View(order.ToList());
         }
     }
 }
-//            var products = db.products.Include(p => p.brand).Include(p => p.category);
-//                products = products.Where(s => s.product_name.Contains(searchString));
+

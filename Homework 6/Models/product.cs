@@ -34,5 +34,8 @@ namespace Homework_6.Models
         public virtual ICollection<order_items> order_items { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock> stocks { get; set; }
+
+        public List<brand> brands { get; set; }
+        public List<category> categories { get; set; }
     }
 }

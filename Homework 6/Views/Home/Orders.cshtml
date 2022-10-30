@@ -6,30 +6,37 @@
 <h2>Orders</h2>
 
 <body>
-    @foreach(var item in Model)
-            {
-        
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product name</th>
-                            <th>List Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@item.product</td>
-                            <td>@item.list_price</td>
-                            <td>@item.quantity</td>
-                            <td>@item.list_price*@item.quantity</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                
-            }
-    
-</body>
+    @foreach (var item in Model)
+    {
+        var total = item.quantity * item.list_price;
+        <table>
+            <thead>
+                <tr>
+                    <th>Product name</th>
+                    <th>List Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.product.product_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.list_price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantity)
+                    </td>
+                    <td>
+                        @total
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
+
+    }
+
+</body>

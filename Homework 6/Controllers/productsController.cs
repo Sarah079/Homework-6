@@ -44,7 +44,7 @@ namespace Homework_6.Controllers
         public JsonResult Edit(int? id)
         {
             product product = db.products.Find(id);
-            var SerializedProduct = new product
+            var thisProduct = new product
             {
                 product_id = product.product_id,
                 product_name = product.product_name,
@@ -55,7 +55,7 @@ namespace Homework_6.Controllers
                 brands = db.brands.ToList().Select(x => new brand { brand_id = x.brand_id, brand_name = x.brand_name }).ToList(),
                 categories = db.categories.ToList().Select(x => new category { category_id = x.category_id, category_name = x.category_name }).ToList()
             };
-            return new JsonResult { Data = new { product = SerializedProduct }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult { Data = new { product = thisProduct }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         [HttpPost]
@@ -80,13 +80,13 @@ namespace Homework_6.Controllers
 
         public JsonResult Details(int? id)
         {
-            product prodInDb = db.products.Where(x => x.product_id == id).FirstOrDefault();
+            product dbProd = db.products.Where(x => x.product_id == id).FirstOrDefault();
             DetailsVM newProd = new DetailsVM();
-            newProd.product_name = prodInDb.product_name;
-            newProd.model_year = prodInDb.model_year;
-            newProd.list_price = prodInDb.list_price;
-            newProd.brand_name = prodInDb.brand.brand_name;
-            newProd.category_name = prodInDb.category.category_name;
+            newProd.product_name = dbProd.product_name;
+            newProd.model_year = dbProd.model_year;
+            newProd.list_price = dbProd.list_price;
+            newProd.brand_name = dbProd.brand.brand_name;
+            newProd.category_name = dbProd.category.category_name;
             newProd.quantities = (
                         from stock in db.stocks.ToList()
                         join store in db.stores.ToList() on stock.store_id equals store.store_id
@@ -103,13 +103,13 @@ namespace Homework_6.Controllers
 
         public JsonResult Delete(int? id)
         {
-            product prodInDb = db.products.Where(x => x.product_id == id).FirstOrDefault();
+            product dbProd = db.products.Where(x => x.product_id == id).FirstOrDefault();
             DetailsVM newProd = new DetailsVM();
-            newProd.product_name = prodInDb.product_name;
-            newProd.model_year = prodInDb.model_year;
-            newProd.list_price = prodInDb.list_price;
-            newProd.brand_name = prodInDb.brand.brand_name;
-            newProd.category_name = prodInDb.category.category_name;
+            newProd.product_name = dbProd.product_name;
+            newProd.model_year = dbProd.model_year;
+            newProd.list_price = dbProd.list_price;
+            newProd.brand_name = dbProd.brand.brand_name;
+            newProd.category_name = dbProd.category.category_name;
             return new JsonResult { Data = new { product = newProd }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
